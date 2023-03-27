@@ -13,7 +13,8 @@ const Type = (Sequelize) => {
             allowNull: false,
             unique: true,
         },
-    });
+    },
+    {timestamps: false});
 };
 
 module.exports = Type;
