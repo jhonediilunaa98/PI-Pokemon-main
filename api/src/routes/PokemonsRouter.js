@@ -1,5 +1,5 @@
 const {Router} = require('express')
-const{getAll, getPokemonByName, getPokemons} = require('../controllers/getPokemons')
+const{getAll, getPokemonByName, getPokemons, getPokemonById} = require('../controllers/getPokemons')
 const pokemonsRouter = Router()
 
   pokemonsRouter.get('/',(req, res) =>{
@@ -12,8 +12,19 @@ const pokemonsRouter = Router()
 // })
  
 
- pokemonsRouter.get('/:id',(req, res) =>{
-  res.send(' Esta ruta obtiene el detalle de un pokemon específico.')
+ pokemonsRouter.get('/:id', async(req, res) =>{
+  try{
+  const {id} = req.params;
+  if(id < 1281){
+    const response = await getPokemonById(id)
+    return res.status(200).send(response)
+  } else{
+     const fronDb = getPokemonByIdFromDb(id)
+     return res.status(200).send(fronDb);
+   }
+  }catch(error){
+    res.status(400).send(error.message)
+  }
 })
 
 
