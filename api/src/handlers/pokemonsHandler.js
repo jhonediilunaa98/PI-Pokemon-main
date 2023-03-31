@@ -1,17 +1,23 @@
 
 
 const getPokemonsHandler = (req, res)=>{
-    res.send("trae todos los pokeemons")
+    const {name} =req.query;
+     if(name) res.send(`quiero todos los nombres ${name}`);
+     else res.send("trae todos los pokeemons");
+     
+
 };
 
 
 const getPokemonsIdHandler=(req, res)=>{
-    res.send("trae los pokemosn por ID")
+    const {id} = req.params;
+    res.send(` trae los pokemosn por id ${id}`)
 };
 
 
 const createPokemonsHandler = (req, res)=>{
-    res.send("Crea  pokeemons")
+    const {name} = req.body;
+    res.send(`Crea  pokeemons con estos datos name:${name}`)
 };
 
 
