@@ -1,4 +1,5 @@
-const {createPokemon} = require("../controllers/pokemonsController")
+const { response } = require("express");
+const {createPokemon, getPokemonById} = require("../controllers/pokemonsController")
 
 const getPokemonsHandler = (req, res)=>{
     const {name} =req.query;
@@ -9,15 +10,27 @@ const getPokemonsHandler = (req, res)=>{
 };
 
 
-const getPokemonsIdHandler=(req, res)=>{
+
+const getPokemonsIdHandler= async (req, res)=>{
     const {id} = req.params;
-    res.send(` trae los pokemosn por id ${id}`)
+    try {
+        if (id <1010) {
+            const response = await getPokemonById(id);
+            return res.status(200).send(response);
+        }else{
+            const fromDb = await getPokemonByIdFromDb(id);
+            return res.status(200).send(fromDb);
+        }
+    } catch (error) {
+        res.status(400).json({erorr: error.message});
+    }
+    
 };
 
 
 const createPokemonsHandler = async (req, res)=>{
+    const {name} = req.body;
     try {
-        const {name} = req.body;
         const newPokemon = await createPokemon (name);
         res.status(201).json(newPokemon)
         
