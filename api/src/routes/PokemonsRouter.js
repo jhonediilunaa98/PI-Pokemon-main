@@ -1,4 +1,4 @@
-const{getAll, getPokemonByName, getPokemons, getPokemonById} = require('../controllers/getPokemons')
+//const{getAll, getPokemonByName, getPokemons, getPokemonById} = require('../controllers/getPokemons')
 const {Router} = require('express')
 const {
   getPokemonsHandler,

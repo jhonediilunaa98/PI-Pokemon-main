@@ -1,11 +1,13 @@
-//const {pokemons} = require("../db")
+const {Pokemon} = require("../db")
+//const Pokemon = require("../models/Pokemon")
 
 
-// const createPokemon = ()=>{}
+const createPokemon = async (name)=>
+    await Pokemon.create({name});
 
 
 
 
 
 
-// module.exports ={createPokemon}
+ module.exports ={createPokemon}
