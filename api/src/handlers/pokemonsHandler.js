@@ -1,12 +1,25 @@
-const { response } = require("express");
-const {createPokemon, getPokemonById} = require("../controllers/pokemonsController")
+//const { Router } = require("express");
+const {getAll, 
+    getPokemonById,
+    getPokemonByIdFromDb,
+    getPokemonByName,
+    } = require("../controllers/pokemonsController")
 
-const getPokemonsHandler = (req, res)=>{
-    const {name} =req.query;
-     if(name) res.send(`quiero todos los nombres ${name}`);
-     else res.send("trae todos los pokeemons");
-     
-
+const getPokemonsHandler = async (req, res) => {
+    try {
+        const { name } = req.query;
+        
+        if (name) {
+            const pokemon = await getPokemonByName(name.toLowerCase());
+            if (!pokemon){
+                throw new Error("Pokemon not founded");
+            } return res.status(200).send(pokemon);
+        }
+        const allPokemons = await getAll();
+        return res.status(200).send(allPokemons);
+    } catch (error) {
+        res.status(400).send(error.message);
+    }
 };
 
 
