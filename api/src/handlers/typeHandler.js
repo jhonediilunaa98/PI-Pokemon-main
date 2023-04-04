@@ -1,3 +1,7 @@
+//const { Router } = require('express');
+//const {  Type } = require('../db.js');
+//const {getTypeHandler}= require("../controllers/typesController.js")
+const { getTypes } = require('../controllers/getTypes');
 
 
 
@@ -14,4 +18,4 @@ const getTypeHandler = async (req, res) => {
 
 
 
-module.exports = getTypeHandler
+module.exports = getTypeHandler;
